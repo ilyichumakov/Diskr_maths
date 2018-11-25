@@ -43,16 +43,23 @@ namespace Diskr_maths
         private void button1_Click(object sender, EventArgs e)
         {
             Label a = new Label();
+            TextBox t = new TextBox();            
             a.Text = "New";
+            a.BackColor = Color.Transparent;
+            a.AutoSize = true;
+            t.Font = new Font("Tahoma", 12);
+            t.Size = new System.Drawing.Size(200,18);
             int x = 10;
             int y = 10;
             while (GetChildAtPoint( new Point(x,y)) is Label)
             {
-                y += 15;
+                y += 50;
             }
             a.Location = new Point(x, y);
-            Form1.ActiveForm.Controls.Add(a);            
-            if(IsEnough()) button2.Enabled = true;
+            t.Location = new Point(x, y + 17);
+            Form1.ActiveForm.Controls.Add(a);
+            Form1.ActiveForm.Controls.Add(t);
+            if (IsEnough()) button2.Enabled = true;
         }
     }
 }
