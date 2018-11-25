@@ -60,6 +60,8 @@ namespace Diskr_maths
             Form1.ActiveForm.Controls.Add(a);
             Form1.ActiveForm.Controls.Add(t);
             if (IsEnough()) button2.Enabled = true;
+            DataInput f = new DataInput();
+            f.Show();
         }
     }
 }

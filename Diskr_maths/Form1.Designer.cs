@@ -77,7 +77,7 @@
             this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.ShowIcon = false;
-            this.Text = "Form1";
+            this.Text = "Анализатор опросов";
             this.ResumeLayout(false);
 
         }
