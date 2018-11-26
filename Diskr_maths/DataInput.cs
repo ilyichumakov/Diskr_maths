@@ -17,6 +17,14 @@ namespace Diskr_maths
             InitializeComponent();
         }
 
+        public DataInput(Form1 MainF)
+        {
+            InitializeComponent();
+            There = MainF;
+        }
+
+        private Form1 There;
+
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             if (!IsEmptyInput()) {
@@ -25,7 +33,7 @@ namespace Diskr_maths
                 t.Multiline = true;
                 int x = 12;
                 int xt = 157;
-                int y = 90;
+                int y = 135;
                 int k = 1;
                 t.Size = new System.Drawing.Size(141, 56);
                 while (GetChildAtPoint(new Point(xt + 5, y + 2)) is TextBox)
@@ -41,29 +49,32 @@ namespace Diskr_maths
                 t.TextChanged += new System.EventHandler(textBox1_TextChanged);
                 DataInput.ActiveForm.Controls.Add(l);
                 DataInput.ActiveForm.Controls.Add(t);
-            }
-            
+            }            
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             Label a = new Label();
             TextBox t = new TextBox();
-            a.Text = "New";
+            a.Text = textBox2.Text;
             a.BackColor = Color.Transparent;
             a.AutoSize = true;
             t.Font = new Font("Tahoma", 12);
             t.Size = new System.Drawing.Size(200, 18);
             int x = 10;
             int y = 10;
-            while (GetChildAtPoint(new Point(x, y)) is Label)
+            while (There.GetChildAtPoint(new Point(x, y)) is Label)
             {
                 y += 50;
             }
             a.Location = new Point(x, y);
             t.Location = new Point(x, y + 17);
-            Form1.ActiveForm.Controls.Add(a);
-            Form1.ActiveForm.Controls.Add(t);
+            /*Form1.ActiveForm.Controls.Add(a);
+            Form1.ActiveForm.Controls.Add(t);*/
+            /*DataInput.ActiveForm.ParentForm.Controls.Add(a);
+            DataInput.ActiveForm.ParentForm.Controls.Add(t);*/
+            There.Controls.Add(a);
+            There.Controls.Add(t);
         }
 
         private void DataInput_Load(object sender, EventArgs e)
