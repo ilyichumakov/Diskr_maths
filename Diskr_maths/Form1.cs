@@ -23,8 +23,7 @@ namespace Diskr_maths
             if (Form1.ActiveForm.Controls.Count > 0)
             {                
                 foreach (Control a in Form1.ActiveForm.Controls)
-                {
-                    //MessageBox.Show(a.GetType().ToString());
+                {                 
                     if(a is Label)
                     {
                         k++;
