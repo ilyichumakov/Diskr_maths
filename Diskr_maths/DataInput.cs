@@ -49,6 +49,7 @@ namespace Diskr_maths
                 t.TextChanged += new System.EventHandler(textBox1_TextChanged);
                 DataInput.ActiveForm.Controls.Add(l);
                 DataInput.ActiveForm.Controls.Add(t);
+                
             }            
         }
 
@@ -69,10 +70,6 @@ namespace Diskr_maths
             }
             a.Location = new Point(x, y);
             t.Location = new Point(x, y + 17);
-            /*Form1.ActiveForm.Controls.Add(a);
-            Form1.ActiveForm.Controls.Add(t);*/
-            /*DataInput.ActiveForm.ParentForm.Controls.Add(a);
-            DataInput.ActiveForm.ParentForm.Controls.Add(t);*/
             There.Controls.Add(a);
             There.Controls.Add(t);
         }
@@ -104,8 +101,7 @@ namespace Diskr_maths
             if (Form1.ActiveForm.Controls.Count > 0)
             {
                 foreach (Control a in DataInput.ActiveForm.Controls)
-                {
-                    //MessageBox.Show(a.GetType().ToString());
+                {                   
                     if (a is TextBox)
                     {
                         if (a.Text == "") return true;
