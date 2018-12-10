@@ -27,7 +27,8 @@ namespace Diskr_maths
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            if (!IsEmptyInput()) {
+            if (!IsEmptyInput() && comboBox1.SelectedItem.ToString() == "Несколько вариантов ответа")
+            {
                 Label l = new Label();
                 TextBox t = new TextBox();
                 t.Multiline = true;
@@ -60,6 +61,7 @@ namespace Diskr_maths
                 Label a = new Label();
                 TextBox t = new TextBox();
                 a.Text = textBox2.Text;
+                a.Text += " (" + textBox1.Text + ")";
                 a.BackColor = Color.Transparent;
                 a.AutoSize = true;
                 t.Font = new Font("Tahoma", 12);
@@ -79,10 +81,12 @@ namespace Diskr_maths
                             if (z.Location.Y > y)
                             {
                                 y = z.Location.Y;
+                                y += 18;
                             }
                         }
                     }
                 }
+                y += 10;
                 a.Location = new Point(x, y);
                 t.Location = new Point(x, y + 17);
                 There.Controls.Add(a);
@@ -138,6 +142,77 @@ namespace Diskr_maths
                 There.Controls.Add(a2);
                 There.Controls.Add(t1);
                 There.Controls.Add(t2);
+            }
+            else
+            {
+                Label a = new Label();
+                List<Label> a1 = new List<Label>();
+                List<TextBox> t1 = new List<TextBox>();
+                a.Text = textBox2.Text;
+                a.BackColor = Color.Transparent;
+                a.AutoSize = true;
+                a.Font = new Font("Tahoma", 14);
+                int x = 10;
+                int y = 0;
+                if (There.Controls.Count > 0)
+                {
+                    foreach (Control z in There.Controls)
+                    {
+                        if (z is TextBox)
+                        {
+                            if (z.Location.Y > y)
+                            {
+                                y = z.Location.Y;
+                                y += 18;
+                                x = z.Location.X;
+                            }
+                        }
+                    }
+                }
+                y += 10;
+                a.Location = new Point(x, y);
+                There.Controls.Add(a);
+                y += 20;
+                foreach (Control c in this.Controls)
+                {
+                    if  (c is TextBox)
+                    {
+                        if (c.Name != "textBox2")
+                        {
+                            if (c.Text != "")
+                            {
+                                Label b = new Label();
+                                TextBox t = new TextBox();
+                                b.Text = c.Text;
+                                b.BackColor = Color.Transparent;
+                                b.AutoSize = true;
+                                t.Font = new Font("Tahoma", 12);
+                                t.Size = new System.Drawing.Size(200, 18);
+                                if (There.Controls.Count > 0)
+                                {
+                                    foreach (Control z in There.Controls)
+                                    {
+                                        if (z is TextBox)
+                                        {
+                                            if (z.Location.Y >= y)
+                                            {
+                                                y = z.Location.Y;
+                                                y += 25;
+                                            }
+                                        }
+                                    }
+                                }
+                                y += 10;
+                                t.Location = new Point(x+180, y);
+                                b.Location = new Point(x, y + 4);
+                                b.MaximumSize = new Size(160, 40);
+                                There.Controls.Add(t);
+                                There.Controls.Add(b);
+                            }
+                        }
+                    }
+                }              
+               
             }
         }
 
