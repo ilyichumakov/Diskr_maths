@@ -55,23 +55,90 @@ namespace Diskr_maths
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Label a = new Label();
-            TextBox t = new TextBox();
-            a.Text = textBox2.Text;
-            a.BackColor = Color.Transparent;
-            a.AutoSize = true;
-            t.Font = new Font("Tahoma", 12);
-            t.Size = new System.Drawing.Size(200, 18);
-            int x = 10;
-            int y = 10;
-            while (There.GetChildAtPoint(new Point(x, y)) is Label)
+            if (comboBox1.SelectedItem.ToString() == "Один вариант ответа")
             {
-                y += 50;
+                Label a = new Label();
+                TextBox t = new TextBox();
+                a.Text = textBox2.Text;
+                a.BackColor = Color.Transparent;
+                a.AutoSize = true;
+                t.Font = new Font("Tahoma", 12);
+                t.Size = new System.Drawing.Size(200, 18);
+                int x = 10;
+                int y = 10;
+                /*while (There.GetChildAtPoint(new Point(x, y)) is Label)
+                {
+                    y += 50;
+                }*/
+                if (There.Controls.Count > 0)
+                {
+                    foreach (Control z in There.Controls)
+                    {
+                        if (z is TextBox)
+                        {
+                            if (z.Location.Y > y)
+                            {
+                                y = z.Location.Y;
+                            }
+                        }
+                    }
+                }
+                a.Location = new Point(x, y);
+                t.Location = new Point(x, y + 17);
+                There.Controls.Add(a);
+                There.Controls.Add(t);
             }
-            a.Location = new Point(x, y);
-            t.Location = new Point(x, y + 17);
-            There.Controls.Add(a);
-            There.Controls.Add(t);
+            else if (comboBox1.SelectedItem.ToString() == "Да/нет")
+            {
+                Label a = new Label();
+                Label a1 = new Label();
+                Label a2 = new Label();
+                TextBox t1 = new TextBox();
+                TextBox t2 = new TextBox();
+                a.Text = textBox2.Text;
+                a.BackColor = Color.Transparent;
+                a.AutoSize = true;
+                a1.Text = "Да";
+                a1.BackColor = Color.Transparent;
+                a1.AutoSize = true;
+                a2.Text = "Нет";
+                a2.BackColor = Color.Transparent;
+                a2.AutoSize = true;
+                t1.Font = new Font("Tahoma", 12);
+                t1.Size = new System.Drawing.Size(200, 18);
+                t2.Font = new Font("Tahoma", 12);
+                t2.Size = new System.Drawing.Size(200, 18);
+                int x = 10;
+                int y = 0;
+                /*while (There.GetChildAtPoint(new Point(x + 40, y)) is Label)
+                {
+                    y += 64;
+                }*/
+                if (There.Controls.Count > 0)
+                { 
+                    foreach (Control z in There.Controls)
+                    {
+                        if (z is TextBox)
+                        {
+                            if (z.Location.Y>y) {
+                                y = z.Location.Y;
+                                y += 18;
+                            }
+                        }
+                    }
+                }
+                y += 10;
+                a.Location = new Point(x, y);
+                a1.Location = new Point(x, y+21);
+                a2.Location = new Point(x, y+54);
+                t1.Location = new Point(x+38, y + 17);
+                t2.Location = new Point(x+38, y + 50);
+                There.Controls.Add(a);
+                There.Controls.Add(a1);
+                There.Controls.Add(a2);
+                There.Controls.Add(t1);
+                There.Controls.Add(t2);
+            }
         }
 
         private void DataInput_Load(object sender, EventArgs e)
