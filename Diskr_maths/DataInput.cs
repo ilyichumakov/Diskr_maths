@@ -72,6 +72,8 @@ namespace Diskr_maths
             t.Location = new Point(x, y + 17);
             There.Controls.Add(a);
             There.Controls.Add(t);
+            There.q.Add(textBox2.Text);
+            this.Dispose();
         }
 
         private void DataInput_Load(object sender, EventArgs e)
@@ -110,6 +112,11 @@ namespace Diskr_maths
                 return false;
             }
             else return false;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
         }
     }
 }

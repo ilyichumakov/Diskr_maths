@@ -30,14 +30,28 @@ namespace Diskr_maths
                     }
                 }
             }
-            if (k > 1) return true;
+            if (k > 2) return true;
             else return false;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            IsEnough();
+            //IsEnough();
+            foreach(Control c in this.Controls)
+            {
+                if(c is TextBox && Int32.TryParse(c.Text, out int f))
+                {
+                    continue;
+                }
+                else
+                {
+                    MessageBox.Show("Не все значения заполнены, исправьте это", "Так нельзя", MessageBoxButtons.OK);
+                    break;
+                }
+            }
         }
+
+        public List<string> q = new List<string>();
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -45,5 +59,22 @@ namespace Diskr_maths
             f.Show();
             if (IsEnough()) button2.Enabled = true;            
         }
+
+        private int IncMis(List<int> pows, int cnt)
+        {
+            int res = 0;
+            int i = 0;
+            while (i < cnt)
+            {
+                res += pows[i];
+                i++;
+            }
+            while (i < pows.Count)
+            {
+                res -= pows[i];
+            }
+            return res;
+        }
+
     }
 }
