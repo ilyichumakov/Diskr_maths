@@ -36,7 +36,49 @@ namespace Diskr_maths
 
         private void button2_Click(object sender, EventArgs e)
         {
-            IsEnough();
+            //IsEnough();
+            bool goingOn = true;
+            foreach (Control c in this.Controls)
+            {
+                if (c is TextBox && Int32.TryParse(c.Text, out int f))
+                {
+                    p.Add(f);
+                }
+                else if(c is TextBox)
+                {
+                    MessageBox.Show("Не все значения заполнены, исправьте это", "Так нельзя", MessageBoxButtons.OK);
+                    goingOn = false;
+                    p.Clear();
+                    break;
+                }
+            }
+            if (goingOn)
+            {
+                AskUser adt = new AskUser(this);
+                for (int i=0; i<q.Count-1; i++)
+                {
+                    for(int j=i+1; j<q.Count; j++)
+                    {
+                        Label l = new Label();
+                        TextBox t = new TextBox();                        
+                        int x = 12;                        
+                        int y = 10;                        
+                        t.Size = new System.Drawing.Size(80, 16);
+                        while (GetChildAtPoint(new Point(x + 5, y + 2)) is TextBox)
+                        {
+                            y += 67;                            
+                        }
+                        l.Text = q[i]+" и "+q[j];
+                        l.Font = new Font("Tahoma", 12);
+                        l.AutoSize = true;
+                        l.Location = new Point(x, y);
+                        t.Location = new Point(x, y+20);                        
+                        adt.Controls.Add(l);
+                        adt.Controls.Add(t);
+                    }
+                }
+                adt.Show();
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -44,6 +86,26 @@ namespace Diskr_maths
             DataInput f = new DataInput(this);           
             f.Show();
             if (IsEnough()) button2.Enabled = true;            
+        }
+
+        public List<string> q = new List<string>();
+        public List<int> p = new List<int>();
+
+        public int IncMis(List<int> pows, int cnt)
+        {
+            int res = 0;
+            int i = 0;
+            while (i < cnt)
+            {
+                res += pows[i];
+                i++;
+            }
+            while (i < pows.Count)
+            {
+                res -= pows[i];
+                i++;
+            }
+            return res;
         }
     }
 }

@@ -45,6 +45,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AskUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AskUser.Designer.cs">
+      <DependentUpon>AskUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataInput.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -59,6 +65,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AskUser.resx">
+      <DependentUpon>AskUser.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DataInput.resx">
       <DependentUpon>DataInput.cs</DependentUpon>
     </EmbeddedResource>

@@ -142,6 +142,8 @@ namespace Diskr_maths
                 There.Controls.Add(a2);
                 There.Controls.Add(t1);
                 There.Controls.Add(t2);
+                There.q.Add(a.Text + a1.Text);
+                There.q.Add(a.Text + a2.Text);
             }
             else
             {
@@ -208,12 +210,13 @@ namespace Diskr_maths
                                 b.MaximumSize = new Size(160, 40);
                                 There.Controls.Add(t);
                                 There.Controls.Add(b);
+                                There.q.Add(c.Text);
                             }
                         }
                     }
-                }              
-               
+                }             
             }
+            this.Dispose();
         }
 
         private void DataInput_Load(object sender, EventArgs e)
