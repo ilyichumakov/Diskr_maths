@@ -26,14 +26,23 @@ namespace Diskr_maths
 
         private void button1_Click(object sender, EventArgs e)
         {
+            
             foreach (Control z in this.Controls)
             {
                 if (z is TextBox && Int32.TryParse(z.Text, out int f))
                 {
-                    There.p.Add(f);
+                    There.p.Add(f);                    
                 }
             }
             this.Hide();
+            for (int i=0; i<There.Controls.Count; i++)
+            {
+                if(There.Controls[i] is TextBox|| There.Controls[i] is Label)
+                {
+                    There.Controls[i].Dispose();
+                    i--;
+                }
+            }
             MessageBox.Show("Всего в опросе приняло участие " + There.IncMis(There.p, There.q.Count) + " человек", "Результаты", MessageBoxButtons.OK);
             this.Dispose();
         }

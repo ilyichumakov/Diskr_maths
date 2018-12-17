@@ -15,18 +15,19 @@ namespace Diskr_maths
         public Form1()
         {
             InitializeComponent();
-        }
+        }        
 
         private bool IsEnough()
         {
             int k = 0;
+            
             if (Form1.ActiveForm.Controls.Count > 0)
             {                
                 foreach (Control a in Form1.ActiveForm.Controls)
                 {                 
                     if(a is Label)
                     {
-                        k++;
+                        k++;                        
                     }
                 }
             }
@@ -38,6 +39,7 @@ namespace Diskr_maths
         {
             //IsEnough();
             bool goingOn = true;
+            p.Clear();
             foreach (Control c in this.Controls)
             {
                 if (c is TextBox && Int32.TryParse(c.Text, out int f))
@@ -47,8 +49,7 @@ namespace Diskr_maths
                 else if(c is TextBox)
                 {
                     MessageBox.Show("Не все значения заполнены, исправьте это", "Так нельзя", MessageBoxButtons.OK);
-                    goingOn = false;
-                    p.Clear();
+                    goingOn = false;                    
                     break;
                 }
             }

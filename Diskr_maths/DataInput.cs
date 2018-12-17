@@ -222,7 +222,7 @@ namespace Diskr_maths
         private void DataInput_Load(object sender, EventArgs e)
         {
             comboBox1.Items.Add("Да/нет");
-            comboBox1.Items.Add("Один вариант ответа");
+            //comboBox1.Items.Add("Один вариант ответа");
             comboBox1.Items.Add("Несколько вариантов ответа");
             comboBox1.SelectedItem = comboBox1.Items[0];
         }
