@@ -17,48 +17,32 @@ namespace Diskr_maths
             InitializeComponent();
         }
 
-        private bool IsEnough()
-        {
-            int k = 0;
-            if (Form1.ActiveForm.Controls.Count > 0)
-            {                
-                foreach (Control a in Form1.ActiveForm.Controls)
-                {                 
-                    if(a is Label)
-                    {
-                        k++;
-                    }
-                }
-            }
-            if (k > 2) return true;
-            else return false;
-        }
-
         private void button2_Click(object sender, EventArgs e)
         {
-            //IsEnough();
-            foreach(Control c in this.Controls)
+            q.Clear();
+            foreach (Control z in this.Controls)
             {
-                if(c is TextBox && Int32.TryParse(c.Text, out int f))
+                if (z is Panel)
                 {
-                    continue;
-                }
-                else
-                {
-                    MessageBox.Show("Не все значения заполнены, исправьте это", "Так нельзя", MessageBoxButtons.OK);
-                    break;
-                }
+                    foreach (Control c in z.Controls)
+                    {
+                        if (c is TextBox && c.Visible==true && Int32.TryParse(c.Text, out int f))
+                        {
+                            q.Add(f);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Не все значения заполнены, исправьте это", "Так нельзя", MessageBoxButtons.OK);
+                            break;
+                        }
+                    }
+                }                
             }
+            MessageBox.Show("Мощность объединенных множеств "+IncMis(q, Int32.Parse(comboBox1.SelectedItem.ToString())), "Результат", MessageBoxButtons.OK);
         }
 
-        public List<string> q = new List<string>();
+       public List<int> q = new List<int>();
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            DataInput f = new DataInput(this);           
-            f.Show();
-            if (IsEnough()) button2.Enabled = true;            
-        }
 
         private int IncMis(List<int> pows, int cnt)
         {
@@ -76,5 +60,89 @@ namespace Diskr_maths
             return res;
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            comboBox1.Items.Add("2");
+            comboBox1.Items.Add("3");
+            comboBox1.Items.Add("4");
+            comboBox1.Items.Add("5");
+            comboBox1.SelectedItem = comboBox1.Items[0];
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedItem == comboBox1.Items[0])
+            {
+                foreach(Control z in this.Controls)
+                {
+                    if (z is Panel)
+                    {
+                        foreach (Control r in z.Controls)
+                        {
+                            if (r is Label && Int32.Parse(r.Name.Substring(5)) > 4 ||
+                            r is TextBox && Int32.Parse(r.Name.Substring(7)) > 3)
+                            {
+                                r.Visible = false;
+                            }
+                        }
+                    }
+                }
+            }
+            else if (comboBox1.SelectedItem == comboBox1.Items[1])
+            {
+                foreach (Control z in this.Controls)
+                {
+                    if (z is Panel)
+                    {
+                        foreach (Control r in z.Controls)
+                        {
+                            if (r is Label && Int32.Parse(r.Name.Substring(5)) > 8 ||
+                        r is TextBox && Int32.Parse(r.Name.Substring(7)) > 7)
+                            {
+                                r.Visible = false;
+                            }
+                            else
+                            {
+                                r.Visible = true;
+                            }
+                        }
+                    }
+                }
+            }
+            else if (comboBox1.SelectedItem == comboBox1.Items[2])
+            {
+                foreach (Control z in this.Controls)
+                {
+                    if (z is Panel)
+                    {
+                        foreach (Control r in z.Controls)
+                        {
+                            if (r is Label && Int32.Parse(r.Name.Substring(5)) > 16 ||
+                        r is TextBox && Int32.Parse(r.Name.Substring(7)) > 15)
+                            {
+                                r.Visible = false;
+                            }
+                            else
+                            {
+                                r.Visible = true;
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                foreach (Control z in this.Controls)
+                {
+                    if (z is Panel)
+                    {
+                        foreach (Control r in z.Controls)
+                        {                           
+                            r.Visible = true;                           
+                        }
+                    }
+                }
+            }
+        }
     }
 }
