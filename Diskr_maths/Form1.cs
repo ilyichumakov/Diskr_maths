@@ -20,6 +20,7 @@ namespace Diskr_maths
         private void button2_Click(object sender, EventArgs e)
         {
             q.Clear();
+            //int p = 1;
             foreach (Control z in this.Controls)
             {
                 if (z is Panel)
@@ -28,9 +29,11 @@ namespace Diskr_maths
                     {
                         if (c is TextBox && c.Visible==true && Int32.TryParse(c.Text, out int f))
                         {
-                            q.Add(f);
+                            Control lb = z.Controls.Find("label" + (Int32.Parse(c.Name.Substring(7))+1).ToString(), true)[0];
+                            q.Add(new Hash(lb.Text.Length, f));
+                            //p++;
                         }
-                        else
+                        else if (c is TextBox && c.Visible == true)
                         {
                             MessageBox.Show("Не все значения заполнены, исправьте это", "Так нельзя", MessageBoxButtons.OK);
                             break;
@@ -38,17 +41,30 @@ namespace Diskr_maths
                     }
                 }                
             }
+            IndexComparer comp = new IndexComparer();
+            q.Sort(comp);
             MessageBox.Show("Мощность объединенных множеств "+IncMis(q, Int32.Parse(comboBox1.SelectedItem.ToString())), "Результат", MessageBoxButtons.OK);
         }
 
-       public List<int> q = new List<int>();
+        private List<Hash> q = new List<Hash>();
 
-
-        private int IncMis(List<int> pows, int cnt)
+        private int IncMis(List<Hash> pows, int cnt)
         {
             int res = 0;
             int i = 0;
-            while (i < cnt)
+            int addit = -1;
+            for (int j = 1; j < cnt + 1; j++)
+            {
+                int c = 0;
+                addit *= -1;
+                while(c<Combinations(cnt, j))
+                {
+                    res += addit * pows[i].value;
+                    i++;
+                    c++;
+                }
+            }
+            /*while (i < cnt)
             {
                 res += pows[i];
                 i++;
@@ -56,8 +72,28 @@ namespace Diskr_maths
             while (i < pows.Count)
             {
                 res -= pows[i];
+            }*/
+            return res;
+        }
+
+        private int Factorial(int n)
+        {
+            int res = 1;
+            int i = 1;
+            if (n > 1)
+            {
+                while (i <= n)
+                {
+                    res *= i;
+                    i++;
+                }
             }
             return res;
+        }
+
+        private int Combinations(int n, int k)
+        {
+            return (int)Factorial(n) / Factorial(k) / Factorial(n - k);
         }
 
         private void Form1_Load(object sender, EventArgs e)
